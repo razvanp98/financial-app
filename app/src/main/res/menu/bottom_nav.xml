@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_cursValutar"
+        android:title="Curs valutar"
+        android:icon="@drawable/ic_money" />
+    <item
+    android:id="@+id/nav_crypto"
+    android:title="Crypto"
+    android:icon="@drawable/ic_bitcoin_material" />
+
+    <item
+        android:id="@+id/nav_stock"
+        android:title="Bursa"
+        android:icon="@drawable/ic_stocks" />
+
+    <item
+        android:id="@+id/nav_calculator"
+        android:title="Calculator"
+        android:icon="@drawable/ic_exchangemoney" />
+
+</menu>
