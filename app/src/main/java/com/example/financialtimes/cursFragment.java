@@ -24,10 +24,12 @@ import org.w3c.dom.Text;
 
 import java.net.HttpURLConnection;
 import java.io.IOException;
+import java.util.*;
 
 public class cursFragment extends Fragment {
 
-    private double[] curs_valori = new double[30];
+    List<Double> curs_valori = new ArrayList<Double>();
+    public int curr_length_curs = 0; // Can be accessed by Thread lambda expression below and retains the dynamic length of the values
 
     @Nullable
     @Override
@@ -39,15 +41,14 @@ public class cursFragment extends Fragment {
             @Override
 
             public void run() {
-                int i = 0;
                 try{
                     Document doc = Jsoup.connect("https://www.cursbnr.ro/curs-valutar-bnr").get();
                     Elements data_curs = doc.select("table tbody tr td:first-child");
                     Elements pret_curs = doc.select("table tbody tr td:nth-child(2)");
 
                     for (Element pret: pret_curs){
-                        curs_valori[i] = Double.parseDouble(pret.text());
-                        i++;
+                        curs_valori.add(Double.parseDouble(pret.text()));
+                        curr_length_curs++;
                     }
                 }catch (Exception e) {
                     e.printStackTrace();
@@ -73,10 +74,11 @@ public class cursFragment extends Fragment {
     }
 
     public DataPoint[] fetchVal(){
-        DataPoint[] values = new DataPoint[curs_valori.length];
 
-        for (int i = 0; i < curs_valori.length; i++){
-            DataPoint temp = new DataPoint(i, curs_valori[i]);
+        DataPoint[] values = new DataPoint[curr_length_curs];
+
+        for (int i = 0; i < this.curr_length_curs; i++){
+            DataPoint temp = new DataPoint(i, curs_valori.get(i));
             values[i] = temp;
         }
         return values;
