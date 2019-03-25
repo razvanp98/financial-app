@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -39,11 +40,7 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 
-public class cursFragment extends Fragment {
-
-    public cursFragment(){
-
-    }
+public class cursFragment extends Fragment{
 
     List<Double> curs_valori = new ArrayList<Double>();
     List<Date> curs_date = new ArrayList<Date>();
@@ -115,6 +112,16 @@ public class cursFragment extends Fragment {
         //Initialize the spinner
         Spinner currencySelect = view.findViewById(R.id.fromOptions);
         currencySelect.setPrompt("Selectati moneda");
+
+        // Convert button listener
+        Button convertBtn = view.findViewById(R.id.convertBtn);
+        convertBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+                public void onClick(View view){
+                    optionController();
+            }
+        });
+
         return view;
     }
 
@@ -268,8 +275,8 @@ public class cursFragment extends Fragment {
         EditText fromPrice = getView().findViewById(R.id.fromValue);
         EditText toPrice = getView().findViewById(R.id.toValue);
 
-        String selectedFromOpt = (String) fromOption_Item.getSelectedItem();
-        String selectedToOpt = (String) toOption_Item.getSelectedItem();
+        String selectedFromOpt = fromOption_Item.getSelectedItem().toString();
+        String selectedToOpt = toOption_Item.getSelectedItem().toString();
 
         double parity = calcParity(selectedFromOpt, selectedToOpt);
         double cashInserted = Double.parseDouble(fromPrice.getText().toString());
@@ -311,9 +318,5 @@ public class cursFragment extends Fragment {
         }
 
         return fromTemp/toTemp;
-    }
-
-    public void onClickConvert(View v){
-        optionController();
     }
 }

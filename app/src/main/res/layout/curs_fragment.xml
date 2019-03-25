@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="250dp"
-                android:onClick="onClickConvert()"
+                android:onClick="onClickConvert"
                 android:text="Convert" />
 
             <ImageView
