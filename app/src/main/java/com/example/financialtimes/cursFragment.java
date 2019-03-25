@@ -5,14 +5,21 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -22,14 +29,28 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.w3c.dom.Text;
 
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
 
 public class cursFragment extends Fragment {
 
+    public cursFragment(){
+
+    }
+
     List<Double> curs_valori = new ArrayList<Double>();
-    public int curr_length_curs = 0; // Can be accessed by Thread lambda expression below and retains the dynamic length of the values
+    List<Date> curs_date = new ArrayList<Date>();
+
+    public double euro_price, usd_price, gbp_price, chf_price, huf_price;
+    public int curr_len_curs = 0; // Can be accessed by Thread lambda expression below and retains the dynamic length of the values
+    public int curr_len_date = 0;
 
     @Nullable
     @Override
@@ -48,20 +69,29 @@ public class cursFragment extends Fragment {
 
                     for (Element pret: pret_curs){
                         curs_valori.add(Double.parseDouble(pret.text()));
-                        curr_length_curs++;
+                        curr_len_curs++;
+                    }
+
+                    for(Element data: data_curs){
+                        curs_date.add(convertToDate(data.text()));
+                        curr_len_date++;
                     }
                 }catch (Exception e) {
                     e.printStackTrace();
                 }
-
                 LineGraphSeries<DataPoint> series1 = new LineGraphSeries<>(fetchVal());
                 GraphView graph1 = view.findViewById(R.id.graph1);
 
                 graph1.addSeries(series1);
                 graph1.getViewport().setScrollable(true);
                 graph1.getViewport().setScalable(true);
+                graph1.getViewport().setScalableY(true);
                 graph1.getViewport().setMinY(4.6);
                 graph1.getViewport().setMaxY(4.9);
+
+                graph1.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+                graph1.getGridLabelRenderer().setNumHorizontalLabels(3);
+                graph1.getGridLabelRenderer().setHumanRounding(true);
 
                 GridLabelRenderer glr = graph1.getGridLabelRenderer();
                 glr.setPadding(36);
@@ -69,18 +99,221 @@ public class cursFragment extends Fragment {
         });
 
         thread.start();
+        setEuroRate();
+        setUsdRate();
+        setGbpRate();
+        setChfRate();
+        setHufRate();
+        // set last update
 
+        TextView updatedText = view.findViewById(R.id.updatedOn);
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        String formattedDate = formatter.format(currentTime);
+        updatedText.setText("Updated on: " + formattedDate.toString());
+
+        //Initialize the spinner
+        Spinner currencySelect = view.findViewById(R.id.fromOptions);
+        currencySelect.setPrompt("Selectati moneda");
         return view;
     }
 
     public DataPoint[] fetchVal(){
 
-        DataPoint[] values = new DataPoint[curr_length_curs];
+        DataPoint[] values = new DataPoint[curr_len_curs];
 
-        for (int i = 0; i < this.curr_length_curs; i++){
-            DataPoint temp = new DataPoint(i, curs_valori.get(i));
+        for (int i = 0; i < this.curr_len_curs; i++){
+            DataPoint temp = new DataPoint(curs_date.get(i), curs_valori.get(i));
             values[i] = temp;
         }
         return values;
+    }
+
+    public Date convertToDate(String buff){
+        Date dateConv = new Date();
+        SimpleDateFormat formatData = new SimpleDateFormat("dd.MM.yyyy");
+        try{
+            dateConv = formatData.parse(buff);
+        }catch(ParseException e){
+            e.printStackTrace();
+        }
+
+        return dateConv;
+    }
+
+    public void setEuroRate() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Document docEuro = Jsoup.connect("https://www.conso.ro/curs-valutar").get();
+                    Elements euro_value = docEuro.select("table tbody tr:first-child td:nth-child(5)");
+
+                    for (Element euro : euro_value) {
+                        euro_price = Double.parseDouble(euro.text());
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                TextView eurRon = getView().findViewById(R.id.eur_ron);
+                eurRon.setText(Double.valueOf(euro_price).toString());
+            }
+        });
+
+        thread.start();
+    }
+    public void setUsdRate() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Document docEuro = Jsoup.connect("https://www.conso.ro/curs-valutar").get();
+                    Elements usd_value = docEuro.select("table tbody tr:nth-child(2) td:nth-child(5)");
+
+                    for (Element usd : usd_value) {
+                        usd_price = Double.parseDouble(usd.text());
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                TextView eurRon = getView().findViewById(R.id.usd_ron);
+                eurRon.setText(Double.valueOf(usd_price).toString());
+            }
+        });
+        thread.start();
+
+    }
+    public void setGbpRate() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Document docEuro = Jsoup.connect("https://www.conso.ro/curs-valutar").get();
+                    Elements gbp_value = docEuro.select("table tbody tr:nth-child(3) td:nth-child(5)");
+
+                    for (Element gbp : gbp_value) {
+                        gbp_price = Double.parseDouble(gbp.text());
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                TextView eurRon = getView().findViewById(R.id.gbp_ron);
+                eurRon.setText(Double.valueOf(gbp_price).toString());
+            }
+        });
+
+        thread.start();
+    }
+
+    public void setChfRate() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Document docEuro = Jsoup.connect("https://www.conso.ro/curs-valutar").get();
+                    Elements chf_value = docEuro.select("table tbody tr:nth-child(5) td:nth-child(5)");
+
+                    for (Element chf : chf_value) {
+                        chf_price = Double.parseDouble(chf.text());
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                TextView eurRon = getView().findViewById(R.id.chf_ron);
+                eurRon.setText(Double.valueOf(chf_price).toString());
+            }
+        });
+
+        thread.start();
+    }
+    public void setHufRate() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Document docEuro = Jsoup.connect("https://www.conso.ro/curs-valutar").get();
+                    Elements huf_value = docEuro.select("table tbody tr:nth-child(6) td:nth-child(5)");
+
+                    for (Element huf : huf_value) {
+                        huf_price  = Double.parseDouble(huf.text());
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                StringBuilder builder = new StringBuilder();
+
+                builder.append(Double.valueOf(huf_price).toString()).append(" ").append("RON");
+
+                TextView hufRon = getView().findViewById(R.id.huf_ron);
+                hufRon.setText(builder);
+            }
+        });
+
+        thread.start();
+    }
+
+    public void optionController(){
+        Spinner fromOption_Item = getView().findViewById(R.id.fromOptions);
+        Spinner toOption_Item = getView().findViewById(R.id.toOptions);
+        EditText fromPrice = getView().findViewById(R.id.fromValue);
+        EditText toPrice = getView().findViewById(R.id.toValue);
+
+        String selectedFromOpt = (String) fromOption_Item.getSelectedItem();
+        String selectedToOpt = (String) toOption_Item.getSelectedItem();
+
+        double parity = calcParity(selectedFromOpt, selectedToOpt);
+        double cashInserted = Double.parseDouble(fromPrice.getText().toString());
+        double convertedPrice = cashInserted * parity;
+        toPrice.setText(Double.valueOf(convertedPrice).toString());
+    }
+
+    public double calcParity(String from, String to){
+        double fromTemp = 0;
+        double toTemp = 0;
+        switch(from){
+            case "EUR":
+                fromTemp = euro_price;
+                break;
+            case "USD":
+                fromTemp = usd_price;
+                break;
+            case "GPB":
+                fromTemp = gbp_price;
+                break;
+            case "CHF":
+                fromTemp = chf_price;
+                break;
+        }
+
+        switch(to){
+            case "EUR":
+                toTemp = euro_price;
+                break;
+            case "USD":
+                toTemp = usd_price;
+                break;
+            case "GPB":
+                toTemp = gbp_price;
+                break;
+            case "CHF":
+                toTemp = chf_price;
+                break;
+        }
+
+        return fromTemp/toTemp;
+    }
+
+    public void onClickConvert(View v){
+        optionController();
     }
 }
