@@ -187,8 +187,8 @@ public class cursFragment extends Fragment{
                     e.printStackTrace();
                 }
 
-                TextView eurRon = getView().findViewById(R.id.usd_ron);
-                eurRon.setText(Double.valueOf(usd_price).toString());
+                TextView usdRon = getView().findViewById(R.id.usd_ron);
+                usdRon.setText(Double.valueOf(usd_price).toString());
             }
         });
         thread.start();
@@ -203,15 +203,15 @@ public class cursFragment extends Fragment{
                     Elements gbp_value = docEuro.select("table tbody tr:nth-child(3) td:nth-child(5)");
 
                     for (Element gbp : gbp_value) {
-                        gbp_price = Double.parseDouble(gbp.text());
+                        gbp_price = Double.parseDouble(gbp.text().toString());
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                TextView eurRon = getView().findViewById(R.id.gbp_ron);
-                eurRon.setText(Double.valueOf(gbp_price).toString());
+                TextView gbpRon = getView().findViewById(R.id.gbp_ron);
+                gbpRon.setText(Double.valueOf(gbp_price).toString());
             }
         });
 
@@ -227,15 +227,15 @@ public class cursFragment extends Fragment{
                     Elements chf_value = docEuro.select("table tbody tr:nth-child(5) td:nth-child(5)");
 
                     for (Element chf : chf_value) {
-                        chf_price = Double.parseDouble(chf.text());
+                        chf_price = Double.parseDouble(chf.text().toString());
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                TextView eurRon = getView().findViewById(R.id.chf_ron);
-                eurRon.setText(Double.valueOf(chf_price).toString());
+                TextView chfRon = getView().findViewById(R.id.chf_ron);
+                chfRon.setText(Double.valueOf(chf_price).toString());
             }
         });
 
@@ -281,7 +281,8 @@ public class cursFragment extends Fragment{
         double parity = calcParity(selectedFromOpt, selectedToOpt);
         double cashInserted = Double.parseDouble(fromPrice.getText().toString());
         double convertedPrice = cashInserted * parity;
-        toPrice.setText(Double.valueOf(convertedPrice).toString());
+        String convertedPriceStr = Double.valueOf(convertedPrice).toString();
+        toPrice.setText(convertedPriceStr);
     }
 
     public double calcParity(String from, String to){
@@ -294,7 +295,7 @@ public class cursFragment extends Fragment{
             case "USD":
                 fromTemp = usd_price;
                 break;
-            case "GPB":
+            case "GBP":
                 fromTemp = gbp_price;
                 break;
             case "CHF":
@@ -309,7 +310,7 @@ public class cursFragment extends Fragment{
             case "USD":
                 toTemp = usd_price;
                 break;
-            case "GPB":
+            case "GBP":
                 toTemp = gbp_price;
                 break;
             case "CHF":
@@ -317,6 +318,6 @@ public class cursFragment extends Fragment{
                 break;
         }
 
-        return fromTemp/toTemp;
+        return (fromTemp/toTemp);
     }
 }
