@@ -87,14 +87,6 @@
                 android:onClick="onClickConvert"
                 android:text="Convert" />
 
-            <ImageView
-                android:id="@+id/arrow_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="90dp"
-                android:layout_marginTop="120dp"
-                app:srcCompat="@drawable/ic_arrows" />
-
         </android.support.v7.widget.CardView>
 
 

@@ -6,7 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
@@ -81,10 +83,11 @@ public class cursFragment extends Fragment{
 
                 graph1.addSeries(series1);
                 graph1.getViewport().setScrollable(true);
+                graph1.getViewport().setScalableY(true);
                 graph1.getViewport().setScalable(true);
                 graph1.getViewport().setScalableY(true);
                 graph1.getViewport().setMinY(4.6);
-                graph1.getViewport().setMaxY(4.9);
+                graph1.getViewport().setMaxY(5);
 
                 graph1.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
                 graph1.getGridLabelRenderer().setNumHorizontalLabels(3);
@@ -121,7 +124,6 @@ public class cursFragment extends Fragment{
                     optionController();
             }
         });
-
         return view;
     }
 
@@ -301,6 +303,12 @@ public class cursFragment extends Fragment{
             case "CHF":
                 fromTemp = chf_price;
                 break;
+            case "RON":
+                fromTemp = 1;
+                break;
+            case "HUF":
+                fromTemp = huf_price / 100;
+                break;
         }
 
         switch(to){
@@ -315,6 +323,12 @@ public class cursFragment extends Fragment{
                 break;
             case "CHF":
                 toTemp = chf_price;
+                break;
+            case "RON":
+                toTemp = 1;
+                break;
+            case "HUF":
+                toTemp = huf_price / 100;
                 break;
         }
 

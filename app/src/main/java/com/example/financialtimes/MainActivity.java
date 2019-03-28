@@ -31,9 +31,6 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.nav_stock:
                     currentFrag = new bursaFragment();
                     break;
-                case R.id.nav_calculator:
-                    currentFrag = new calculatorFragment();
-                    break;
             }
         getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, currentFrag).commit();
         return true;

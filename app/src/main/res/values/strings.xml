@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Financial Times</string>
     <string-array name="currency_array">
+        <item>RON</item>
         <item>EUR</item>
         <item>USD</item>
         <item>GBP</item>
