@@ -1,6 +1,7 @@
 package com.example.financialtimes;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,7 +36,7 @@ import java.nio.Buffer;
 import java.util.InvalidPropertiesFormatException;
 
 public class bursaFragment extends Fragment {
-    FloatingActionButton addStockButton = null;
+    Button addStockButton = null;
 
     @Nullable
     @Override
@@ -45,7 +46,7 @@ public class bursaFragment extends Fragment {
         return view;
     }
 
-    // Sets FAB listener => opens the SearchView for querying the SQL DB
+    // Sets Button "View more" click listener => opens the SearchView for querying the SQL DB
     public void OpenStockSearch(View v){
         addStockButton = v.findViewById(R.id.add_stock);
         addStockButton.setOnClickListener(new View.OnClickListener(){
@@ -56,7 +57,6 @@ public class bursaFragment extends Fragment {
             }
         });
     }
-
 
 }
 

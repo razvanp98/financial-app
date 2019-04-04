@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -9,8 +9,7 @@
         android:id="@+id/company_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="2dp"
         android:paddingLeft="15dp"
         android:paddingTop="10dp"
         android:paddingRight="15dp"
@@ -22,7 +21,7 @@
         android:id="@+id/company_symbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="45dp"
         android:layout_marginBottom="8dp"
         android:paddingLeft="15dp"
         android:paddingTop="5dp"
@@ -30,4 +29,65 @@
         android:paddingBottom="10dp"
         android:text="Symbol" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/price_today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Price today: "
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/price_today_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:text="------"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/price_yesterday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:text="Price yesterday: " />
+
+    <TextView
+        android:id="@+id/price_yesterday_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="5dp"
+        android:text="------" />
+
+    <TextView
+        android:id="@+id/volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:text="Volume:"
+         />
+
+    <TextView
+        android:id="@+id/volume_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginBottom="5dp"
+        android:text="------" />
+
+    <Button
+        android:id="@+id/add_stock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Add" />
+
+</RelativeLayout>
