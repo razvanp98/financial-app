@@ -1,20 +1,12 @@
 package com.example.financialtimes;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -30,17 +22,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.w3c.dom.Text;
 
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class cursFragment extends Fragment{
 
@@ -131,7 +119,7 @@ public class cursFragment extends Fragment{
 
         DataPoint[] values = new DataPoint[curr_len_curs];
 
-        for (int i = 0; i < this.curr_len_curs; i++){
+        for (int i = 0; i < this.curr_len_curs; i++){ // 28 is for the last 28 days
             DataPoint temp = new DataPoint(curs_date.get(i), curs_valori.get(i));
             values[i] = temp;
         }
