@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -15,27 +14,21 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
     private List<Companies> companies;
     private Context context;
 
-    public AdapterSearch(List<Companies> companies, Context context) {
+    public AdapterSearch(List<Companies> companies, Context context){
         this.companies = companies;
         this.context = context;
     }
 
     @Override
-    public ViewHolderCompany onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolderCompany onCreateViewHolder(ViewGroup parent, int viewType){
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_company, parent, false);
         return new ViewHolderCompany(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolderCompany holder, int position) {
+    public void onBindViewHolder(final ViewHolderCompany holder, int position){
         holder.name.setText(companies.get(position).getCompany_name());
         holder.symbol.setText(companies.get(position).getCompany_symbol());
-        holder.addStockBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                
-            }
-        });
     }
 
     @Override
@@ -46,13 +39,11 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
     public static class ViewHolderCompany extends RecyclerView.ViewHolder{
 
         TextView name, symbol;
-        Button addStockBtn;
 
         public ViewHolderCompany(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.company_name);
             symbol = itemView.findViewById(R.id.company_symbol);
-            addStockBtn = itemView.findViewById(R.id.add_stock);
         }
     }
 }
