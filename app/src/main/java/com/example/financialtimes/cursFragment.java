@@ -78,11 +78,14 @@ public class cursFragment extends Fragment{
                 graph1.getViewport().setMaxY(5);
 
                 graph1.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                graph1.getGridLabelRenderer().setNumHorizontalLabels(3);
+                graph1.getGridLabelRenderer().setNumHorizontalLabels(7);
                 graph1.getGridLabelRenderer().setHumanRounding(true);
+                graph1.getGridLabelRenderer().setHorizontalLabelsAngle(45);
+
+                graph1.getViewport().setMinimalViewport(0,0,4.7, 4.8);
 
                 GridLabelRenderer glr = graph1.getGridLabelRenderer();
-                glr.setPadding(36);
+                glr.setPadding(20);
             }
         });
 
@@ -247,12 +250,8 @@ public class cursFragment extends Fragment{
                     e.printStackTrace();
                 }
 
-                StringBuilder builder = new StringBuilder();
-
-                builder.append(Double.valueOf(huf_price).toString()).append(" ").append("RON");
-
                 TextView hufRon = getView().findViewById(R.id.huf_ron);
-                hufRon.setText(builder);
+                hufRon.setText(Double.valueOf(huf_price).toString());
             }
         });
 
