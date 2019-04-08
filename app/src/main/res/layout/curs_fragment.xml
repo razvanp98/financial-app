@@ -46,9 +46,9 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="50dp"
                 android:ems="10"
-                android:textSize="13dp"
+                android:hint="From"
                 android:inputType="text"
-                />
+                android:textSize="13dp" />
 
             <EditText
                 android:id="@+id/toValue"
@@ -57,8 +57,9 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="150dp"
                 android:ems="10"
-                android:textSize="13dp"
-                android:inputType="text" />
+                android:hint="To"
+                android:inputType="text"
+                android:textSize="13dp" />
 
 
             <Spinner
@@ -278,7 +279,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/cardView_graph"
             android:layout_width="0dp"
-            android:layout_height="323dp"
+            android:layout_height="384dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
@@ -292,7 +293,7 @@
             <com.jjoe64.graphview.GraphView
                 android:id="@+id/graph1"
                 android:layout_width="wrap_content"
-                android:layout_height="221dp"
+                android:layout_height="292dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="80dp"
                 android:layout_marginRight="8dp"

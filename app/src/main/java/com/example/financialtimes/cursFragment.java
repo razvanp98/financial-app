@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -36,14 +37,21 @@ public class cursFragment extends Fragment{
     List<Date> curs_date = new ArrayList<Date>();
 
     public double euro_price, usd_price, gbp_price, chf_price, huf_price;
-    public int curr_len_curs = 0; // Can be accessed by Thread lambda expression below and retains the dynamic length of the values
+    public int curr_len_curs = 0;
     public int curr_len_date = 0;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.curs_fragment, container, false);
+
+        TextView eurRon = view.findViewById(R.id.eur_ron);
+        TextView usdRon = view.findViewById(R.id.usd_ron);
+        TextView gbpRon = view.findViewById(R.id.gbp_ron);
+        TextView chfRon = view.findViewById(R.id.chf_ron);
+        TextView hufRon = view.findViewById(R.id.huf_ron);
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -70,31 +78,30 @@ public class cursFragment extends Fragment{
                 GraphView graph1 = view.findViewById(R.id.graph1);
 
                 graph1.addSeries(series1);
-                graph1.getViewport().setScrollable(true);
-                graph1.getViewport().setScalableY(true);
                 graph1.getViewport().setScalable(true);
                 graph1.getViewport().setScalableY(true);
-                graph1.getViewport().setMinY(4.6);
-                graph1.getViewport().setMaxY(5);
-
-                graph1.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                graph1.getGridLabelRenderer().setNumHorizontalLabels(7);
-                graph1.getGridLabelRenderer().setHumanRounding(true);
-                graph1.getGridLabelRenderer().setHorizontalLabelsAngle(45);
-
-                graph1.getViewport().setMinimalViewport(0,0,4.7, 4.8);
+                graph1.getViewport().setScrollable(true);
+                graph1.getViewport().setMinY(4.7);
+                graph1.getViewport().setMaxY(4.9);
+                graph1.getViewport().setMinimalViewport(0,0,4.7, 4.85);
 
                 GridLabelRenderer glr = graph1.getGridLabelRenderer();
-                glr.setPadding(20);
+
+                glr.setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+                glr.setNumHorizontalLabels(8);
+                glr.setHumanRounding(true);
+                glr.setHorizontalLabelsAngle(45);
+                glr.setLabelsSpace(10);
+                glr.setPadding(30);
             }
         });
 
         thread.start();
-        setEuroRate();
-        setUsdRate();
-        setGbpRate();
-        setChfRate();
-        setHufRate();
+        setEuroRate(eurRon);
+        setUsdRate(usdRon);
+        setGbpRate(gbpRon);
+        setChfRate(chfRon);
+        setHufRate(hufRon);
         // set last update
 
         TextView updatedText = view.findViewById(R.id.updatedOn);
@@ -122,7 +129,7 @@ public class cursFragment extends Fragment{
 
         DataPoint[] values = new DataPoint[curr_len_curs];
 
-        for (int i = 0; i < this.curr_len_curs; i++){ // 28 is for the last 28 days
+        for (int i = 0; i < this.curr_len_curs; i++){
             DataPoint temp = new DataPoint(curs_date.get(i), curs_valori.get(i));
             values[i] = temp;
         }
@@ -141,7 +148,7 @@ public class cursFragment extends Fragment{
         return dateConv;
     }
 
-    public void setEuroRate() {
+    public void setEuroRate(final TextView eurRon) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -153,18 +160,17 @@ public class cursFragment extends Fragment{
                         euro_price = Double.parseDouble(euro.text());
                     }
 
-                } catch (Exception e) {
+                }catch (Exception e) {
                     e.printStackTrace();
                 }
-
-                TextView eurRon = getView().findViewById(R.id.eur_ron);
                 eurRon.setText(Double.valueOf(euro_price).toString());
             }
         });
 
         thread.start();
     }
-    public void setUsdRate() {
+
+    public void setUsdRate(final TextView usdRon) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -180,14 +186,13 @@ public class cursFragment extends Fragment{
                     e.printStackTrace();
                 }
 
-                TextView usdRon = getView().findViewById(R.id.usd_ron);
                 usdRon.setText(Double.valueOf(usd_price).toString());
             }
         });
         thread.start();
-
     }
-    public void setGbpRate() {
+
+    public void setGbpRate(final TextView gbpRon) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -203,7 +208,6 @@ public class cursFragment extends Fragment{
                     e.printStackTrace();
                 }
 
-                TextView gbpRon = getView().findViewById(R.id.gbp_ron);
                 gbpRon.setText(Double.valueOf(gbp_price).toString());
             }
         });
@@ -211,7 +215,7 @@ public class cursFragment extends Fragment{
         thread.start();
     }
 
-    public void setChfRate() {
+    public void setChfRate(final TextView chfRon) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -227,14 +231,14 @@ public class cursFragment extends Fragment{
                     e.printStackTrace();
                 }
 
-                TextView chfRon = getView().findViewById(R.id.chf_ron);
                 chfRon.setText(Double.valueOf(chf_price).toString());
             }
         });
 
         thread.start();
     }
-    public void setHufRate() {
+
+    public void setHufRate(final TextView hufRon) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -250,7 +254,6 @@ public class cursFragment extends Fragment{
                     e.printStackTrace();
                 }
 
-                TextView hufRon = getView().findViewById(R.id.huf_ron);
                 hufRon.setText(Double.valueOf(huf_price).toString());
             }
         });
@@ -267,16 +270,28 @@ public class cursFragment extends Fragment{
         String selectedFromOpt = fromOption_Item.getSelectedItem().toString();
         String selectedToOpt = toOption_Item.getSelectedItem().toString();
 
-        double parity = calcParity(selectedFromOpt, selectedToOpt);
-        double cashInserted = Double.parseDouble(fromPrice.getText().toString());
-        double convertedPrice = cashInserted * parity;
-        String convertedPriceStr = Double.valueOf(convertedPrice).toString();
-        toPrice.setText(convertedPriceStr);
+        String cashInsertedText = fromPrice.getText().toString();
+        String toPriceText = toPrice.getText().toString();
+
+        // Error handling for empty textboxes
+        if (cashInsertedText.equals("") && toPriceText.equals("")){
+            Toast.makeText(getActivity(), "From textbox must not be empty!", Toast.LENGTH_SHORT).show();
+        }else if(cashInsertedText.equals("") && !toPriceText.equals("")) {
+            Toast.makeText(getActivity(), "Invalid conversion!", Toast.LENGTH_SHORT).show();
+        }else{
+            double parity = calcParity(selectedFromOpt, selectedToOpt);
+            double cashInserted = Double.parseDouble(cashInsertedText);
+            double convertedPrice = cashInserted * parity;
+            String convertedPriceStr = Double.valueOf(convertedPrice).toString();
+            toPrice.setText(convertedPriceStr);
+        }
     }
 
+    // Returns the parity between the two options selected
     public double calcParity(String from, String to){
         double fromTemp = 0;
         double toTemp = 0;
+
         switch(from){
             case "EUR":
                 fromTemp = euro_price;
@@ -295,6 +310,9 @@ public class cursFragment extends Fragment{
                 break;
             case "HUF":
                 fromTemp = huf_price / 100;
+                break;
+            default:
+                fromTemp = 9999999;
                 break;
         }
 
@@ -316,6 +334,9 @@ public class cursFragment extends Fragment{
                 break;
             case "HUF":
                 toTemp = huf_price / 100;
+                break;
+            default:
+                toTemp = 9999999;
                 break;
         }
 
