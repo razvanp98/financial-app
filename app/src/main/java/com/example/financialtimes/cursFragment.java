@@ -37,8 +37,8 @@ public class cursFragment extends Fragment{
     List<Date> curs_date = new ArrayList<Date>();
 
     public double euro_price, usd_price, gbp_price, chf_price, huf_price;
-    public int curr_len_curs = 0;
-    public int curr_len_date = 0;
+    public int price_length = 0;
+    public int dates_length = 0;
 
 
     @Nullable
@@ -64,12 +64,12 @@ public class cursFragment extends Fragment{
 
                     for (Element pret: pret_curs){
                         curs_valori.add(Double.parseDouble(pret.text()));
-                        curr_len_curs++;
+                        price_length++;
                     }
 
                     for(Element data: data_curs){
                         curs_date.add(convertToDate(data.text()));
-                        curr_len_date++;
+                        dates_length++;
                     }
                 }catch (Exception e) {
                     e.printStackTrace();
@@ -97,12 +97,14 @@ public class cursFragment extends Fragment{
         });
 
         thread.start();
+
         setEuroRate(eurRon);
         setUsdRate(usdRon);
         setGbpRate(gbpRon);
         setChfRate(chfRon);
         setHufRate(hufRon);
-        // set last update
+
+        // Set last updated
 
         TextView updatedText = view.findViewById(R.id.updatedOn);
         Date currentTime = Calendar.getInstance().getTime();
@@ -127,9 +129,9 @@ public class cursFragment extends Fragment{
 
     public DataPoint[] fetchVal(){
 
-        DataPoint[] values = new DataPoint[curr_len_curs];
+        DataPoint[] values = new DataPoint[price_length];
 
-        for (int i = 0; i < this.curr_len_curs; i++){
+        for (int i = 0; i < this.price_length; i++){
             DataPoint temp = new DataPoint(curs_date.get(i), curs_valori.get(i));
             values[i] = temp;
         }
@@ -264,11 +266,12 @@ public class cursFragment extends Fragment{
     public void optionController(){
         Spinner fromOption_Item = getView().findViewById(R.id.fromOptions);
         Spinner toOption_Item = getView().findViewById(R.id.toOptions);
+
         EditText fromPrice = getView().findViewById(R.id.fromValue);
         EditText toPrice = getView().findViewById(R.id.toValue);
 
-        String selectedFromOpt = fromOption_Item.getSelectedItem().toString();
-        String selectedToOpt = toOption_Item.getSelectedItem().toString();
+        String fromOption = fromOption_Item.getSelectedItem().toString();
+        String toOption = toOption_Item.getSelectedItem().toString();
 
         String cashInsertedText = fromPrice.getText().toString();
         String toPriceText = toPrice.getText().toString();
@@ -279,7 +282,7 @@ public class cursFragment extends Fragment{
         }else if(cashInsertedText.equals("") && !toPriceText.equals("")) {
             Toast.makeText(getActivity(), "Invalid conversion!", Toast.LENGTH_SHORT).show();
         }else{
-            double parity = calcParity(selectedFromOpt, selectedToOpt);
+            double parity = calculateParity(fromOption, toOption);
             double cashInserted = Double.parseDouble(cashInsertedText);
             double convertedPrice = cashInserted * parity;
             String convertedPriceStr = Double.valueOf(convertedPrice).toString();
@@ -288,7 +291,7 @@ public class cursFragment extends Fragment{
     }
 
     // Returns the parity between the two options selected
-    public double calcParity(String from, String to){
+    public double calculateParity(String from, String to){
         double fromTemp = 0;
         double toTemp = 0;
 
