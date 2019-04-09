@@ -88,7 +88,7 @@ public class cursFragment extends Fragment{
                 GridLabelRenderer glr = graph1.getGridLabelRenderer();
 
                 glr.setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                glr.setNumHorizontalLabels(8);
+                glr.setNumHorizontalLabels(5);
                 glr.setHumanRounding(true);
                 glr.setHorizontalLabelsAngle(45);
                 glr.setLabelsSpace(10);

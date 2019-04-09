@@ -33,4 +33,8 @@ public class Companies {
     public boolean isAddedToFavourites() {
         return addedToFavourites;
     }
+
+    public void setFavourite(boolean isSet){
+        this.addedToFavourites = isSet;
+    }
 }
