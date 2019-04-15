@@ -1,39 +1,14 @@
 package com.example.financialtimes;
 
-import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.Button;
-import android.widget.SearchView;
-import android.widget.TextView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.Buffer;
-import java.util.InvalidPropertiesFormatException;
 
 public class bursaFragment extends Fragment {
     Button addStockButton = null;
@@ -53,10 +28,9 @@ public class bursaFragment extends Fragment {
             @Override
             public void onClick(View v){
                 Intent makeSearchIntent = new Intent(v.getContext(), SearchDatabase.class);
-                startActivity(makeSearchIntent);
+                startActivity(makeSearchIntent); // SearchDatabase is the activity for querying all the companies information
             }
         });
     }
-
 }
 

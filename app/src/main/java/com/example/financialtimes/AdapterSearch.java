@@ -59,10 +59,12 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
         percentageString.append(String.valueOf(truncatedPercentage)).append(" ").append("%");
 
 
-        //String builder for Market Cap
+        // String builder for Market Cap
 
         StringBuilder volumeBuilder = new StringBuilder();
         volumeBuilder.append(companies.get(position).getVolume()).append(" ").append("$");
+
+        // Setting all the information in their containers
 
         holder.name.setText(companies.get(position).getCompany_name());
         holder.symbol.setText(companies.get(position).getCompany_symbol());
@@ -85,6 +87,8 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
         public ViewHolderCompany(View itemView) {
             super(itemView);
+
+            // Gets the containers from the layout resource
             name = itemView.findViewById(R.id.company_name);
             symbol = itemView.findViewById(R.id.company_symbol);
             price_today = itemView.findViewById(R.id.today_price_value);
@@ -96,6 +100,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
         }
     }
 
+    // Calculates percentage of rising/falling price
     double getPercentage(String todayPrice, String yesterdayPrice){
         double todayPriceDouble = Double.parseDouble(todayPrice);
         double yesterdayPriceDouble = Double.parseDouble(yesterdayPrice);

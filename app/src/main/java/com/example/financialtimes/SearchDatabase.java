@@ -43,9 +43,11 @@ public class SearchDatabase extends AppCompatActivity {
         fetchData("");
     }
 
+    // Invokes the ApiClient interface, which makes the call to the database and creates the List of Companies objects
     public void fetchData(String key){
         apiInterface = ApiClient.getAPI().create(Api_Interface.class);
         Call<List<Companies>> callToDatabase = apiInterface.stocks_API(key);
+
 
         callToDatabase.enqueue(new Callback<List<Companies>>() {
             @Override
@@ -53,6 +55,7 @@ public class SearchDatabase extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 companies = response.body();
                 adaptor = new AdapterSearch(companies, SearchDatabase.this);
+                // Settting the adapter to AdapterSearch for showing the results in the ListView
                 companyList.setAdapter(adaptor);
                 adaptor.notifyDataSetChanged();
             }
@@ -65,6 +68,7 @@ public class SearchDatabase extends AppCompatActivity {
         });
     }
 
+    // Search bar implementation
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

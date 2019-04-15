@@ -53,6 +53,8 @@ public class cursFragment extends Fragment{
         TextView chfRon = view.findViewById(R.id.chf_ron);
         TextView hufRon = view.findViewById(R.id.huf_ron);
 
+
+        // Get data for graph
         Thread thread = new Thread(new Runnable() {
             @Override
 
@@ -77,6 +79,7 @@ public class cursFragment extends Fragment{
                 LineGraphSeries<DataPoint> series1 = new LineGraphSeries<>(fetchVal());
                 GraphView graph1 = view.findViewById(R.id.graph1);
 
+                // Graph settings
                 graph1.addSeries(series1);
                 graph1.getViewport().setScalable(true);
                 graph1.getViewport().setScalableY(true);
@@ -87,6 +90,7 @@ public class cursFragment extends Fragment{
 
                 GridLabelRenderer glr = graph1.getGridLabelRenderer();
 
+                // Label settings
                 glr.setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
                 glr.setNumHorizontalLabels(5);
                 glr.setHumanRounding(true);
@@ -98,6 +102,7 @@ public class cursFragment extends Fragment{
 
         thread.start();
 
+        // settings the rates for each currency
         setEuroRate(eurRon);
         setUsdRate(usdRon);
         setGbpRate(gbpRon);
@@ -127,6 +132,7 @@ public class cursFragment extends Fragment{
         return view;
     }
 
+    // Function provides datapoints for the graph
     public DataPoint[] fetchVal(){
 
         DataPoint[] values = new DataPoint[price_length];
@@ -138,6 +144,7 @@ public class cursFragment extends Fragment{
         return values;
     }
 
+    // Date converter for last updated status
     public Date convertToDate(String buff){
         Date dateConv = new Date();
         SimpleDateFormat formatData = new SimpleDateFormat("dd.MM.yyyy");
@@ -150,6 +157,7 @@ public class cursFragment extends Fragment{
         return dateConv;
     }
 
+    // Methods for parsing the html page and bringing the currency value into app
     public void setEuroRate(final TextView eurRon) {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -263,6 +271,7 @@ public class cursFragment extends Fragment{
         thread.start();
     }
 
+    // Calculator option handler
     public void optionController(){
         Spinner fromOption_Item = getView().findViewById(R.id.fromOptions);
         Spinner toOption_Item = getView().findViewById(R.id.toOptions);

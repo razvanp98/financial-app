@@ -3,6 +3,8 @@ package com.example.financialtimes;
 import com.google.gson.annotations.SerializedName;
 
 public class Companies {
+    // SerializedName annotation tells the library that those are the field names in JSON object
+    // that must be expected
     @SerializedName("name") private String company_name;
     @SerializedName("symbol") private String company_symbol;
     @SerializedName("today") private String price_today;
