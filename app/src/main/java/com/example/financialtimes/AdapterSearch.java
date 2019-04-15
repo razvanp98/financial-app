@@ -13,6 +13,10 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+
 public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolderCompany> {
 
     private List<Companies> companies;
@@ -32,7 +36,9 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
     @Override
     public void onBindViewHolder(final ViewHolderCompany holder, final int position) {
 
-        if (companies.get(position).isAddedToFavourites() == true) {
+        if(companies.get(position).addedToFavourites()) {
+            holder.add.setEnabled(true);
+        }else{
             holder.add.setEnabled(false);
         }
 
@@ -72,6 +78,19 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
         holder.price_yesterday.setText(companies.get(position).getPrice_yesterday() + " " + "$");
         holder.market_cap.setText(volumeBuilder.toString());
         holder.percentage.setText(percentageString);
+        holder.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Thread addFav = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        AddFavouriteInterface favouriteInterface = ApiClient.getAPI().create(AddFavouriteInterface.class);
+
+                    }
+                });
+                addFav.start();
+            }
+        });
     }
 
     @Override
