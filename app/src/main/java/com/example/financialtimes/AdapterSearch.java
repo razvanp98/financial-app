@@ -8,14 +8,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolderCompany> {
 
@@ -36,10 +37,10 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
     @Override
     public void onBindViewHolder(final ViewHolderCompany holder, final int position) {
 
-        if(companies.get(position).addedToFavourites()) {
-            holder.add.setEnabled(true);
-        }else{
+        if(companies.get(position).getFavourite().equals("1")){
             holder.add.setEnabled(false);
+        }else{
+            holder.add.setEnabled(true);
         }
 
         //Percentage calculator
@@ -84,8 +85,23 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
                 Thread addFav = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        AddFavouriteInterface favouriteInterface = ApiClient.getAPI().create(AddFavouriteInterface.class);
+                        AddFavouriteInterface favouriteInterface = ApiClientFavourites.getAPI().create(AddFavouriteInterface.class);
+                        Call<Void> updateFavourite = favouriteInterface.favourite_API("1", companies.get(position).getCompany_symbol());
 
+
+                        updateFavourite.enqueue(new Callback<Void>(){
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response){
+                                String symbol = companies.get(position).getCompany_symbol();
+                                Toast.makeText(context, symbol + " has been added to favourites." , Toast.LENGTH_SHORT).show();
+                                holder.add.setEnabled(false);
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t){
+                                Toast.makeText(context, "Failed to add to favourites + " + t.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
                 addFav.start();

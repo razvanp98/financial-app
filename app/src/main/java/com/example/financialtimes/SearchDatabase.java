@@ -55,7 +55,7 @@ public class SearchDatabase extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 companies = response.body();
                 adaptor = new AdapterSearch(companies, SearchDatabase.this);
-                // Settting the adapter to AdapterSearch for showing the results in the ListView
+                // Setting the adapter to AdapterSearch for showing the results in the ListView
                 companyList.setAdapter(adaptor);
                 adaptor.notifyDataSetChanged();
             }

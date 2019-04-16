@@ -10,7 +10,7 @@ public class Companies {
     @SerializedName("today") private String price_today;
     @SerializedName("yesterday") private String price_yesterday;
     @SerializedName("volume") private String volume;
-    @SerializedName("favourite") private boolean favourite;
+    @SerializedName("favourite") private String favourite;
 
     public String getCompany_name() {
         return company_name;
@@ -32,7 +32,7 @@ public class Companies {
         return volume;
     }
 
-    public boolean addedToFavourites() {
+    public String getFavourite() {
         return favourite;
     }
 }
