@@ -48,7 +48,6 @@ public class SearchDatabase extends AppCompatActivity {
         apiInterface = ApiClient.getAPI().create(Api_Interface.class);
         Call<List<Companies>> callToDatabase = apiInterface.stocks_API(key);
 
-
         callToDatabase.enqueue(new Callback<List<Companies>>() {
             @Override
             public void onResponse(Call<List<Companies>> call, Response<List<Companies>> response) {

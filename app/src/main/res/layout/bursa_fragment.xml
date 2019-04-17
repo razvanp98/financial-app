@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cards_swiper"
-    style="@android:style/Widget.DeviceDefault.Light.ScrollView"
+<RelativeLayout android:id="@+id/stocks_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/lightGrey">
-
-
-    <RelativeLayout
-        android:id="@+id/stocks_container"
-        android:layout_width="match_parent"
-        android:layout_height="1500dp">
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <Button
             android:id="@+id/add_stock"
@@ -28,6 +19,11 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-    </RelativeLayout>
-</ScrollView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fav_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="96dp" />
+
+</RelativeLayout>
 
