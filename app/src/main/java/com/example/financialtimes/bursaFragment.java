@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,21 +25,34 @@ import retrofit2.Response;
 public class bursaFragment extends Fragment {
     Button addStockButton = null;
     private RecyclerView company_list;
-    private RecyclerView.LayoutManager favourite_layout;
     private List<Companies> fav_companies;
     private FavouriteAdapter adaptor;
-    private ShowFavouritesInterface favourite_api;
+    ShowFavouritesInterface favourite_api;
+    RecyclerView.LayoutManager favourite_layout;
+    SwipeRefreshLayout refresh = null;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bursa_fragment, container, false);
-        company_list = getActivity().findViewById(R.id.fav_container);
+        company_list = view.findViewById(R.id.fav_container);
         favourite_layout = new LinearLayoutManager(getContext());
         company_list.setLayoutManager(favourite_layout);
         company_list.setHasFixedSize(true);
-        openStockSearch(view);
+
+        // Get refresh layout from fragment
+        refresh = view.findViewById(R.id.refresh);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Fragment current = new bursaFragment();
+                FragmentManager frg_controller = getFragmentManager();
+                FragmentTransaction ft = frg_controller.beginTransaction();
+                ft.replace(R.id.frag_container, current).commit();
+            }
+        });
         fetchFavourites("");
+        openStockSearch(view);
         return view;
     }
 
@@ -54,7 +70,7 @@ public class bursaFragment extends Fragment {
 
     public void fetchFavourites(String key){
         favourite_api = ShowFavouritesClient.getAPI().create(ShowFavouritesInterface.class);
-        final Call<List<Companies>> show_favourites = favourite_api.showFavourites(key);
+        Call<List<Companies>> show_favourites = favourite_api.showFavourites(key);
 
         show_favourites.enqueue(new Callback<List<Companies>>() {
             @Override
@@ -67,9 +83,11 @@ public class bursaFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Companies>> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed to fetch data! " + t.toString(), Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(), "Failed to fetch data! " + t.toString(), Toast.LENGTH_LONG).show();
             }
         });
     }
+
+
 }
 

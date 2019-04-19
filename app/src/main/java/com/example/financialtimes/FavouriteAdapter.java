@@ -8,10 +8,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.ViewHolderFavourite> {
 
@@ -66,6 +71,26 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
         holder.price_yesterday.setText(companies.get(position).getPrice_yesterday() + " " + "$");
         holder.market_cap.setText(volumeBuilder.toString());
         holder.percentage.setText(percentageString);
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RemoveFavourite remove_interface = RemoveFavouriteAPI.getAPI().create(RemoveFavourite.class);
+                Call<Void> remove_favourite = remove_interface.remove_API(companies.get(position).getCompany_name());
+
+                remove_favourite.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response){
+                        Toast.makeText(context, companies.get(position).getCompany_name() + " removed from favourites.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(context, "Unable to remove " + companies.get(position).getCompany_name(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -90,7 +115,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
             market_cap = itemView.findViewById(R.id.market_cap_value);
             percentage = itemView.findViewById(R.id.percentage);
             arrow = itemView.findViewById(R.id.arrow);
-            delete = itemView.findViewById(R.id.delete_btn);
+            delete = itemView.findViewById(R.id.delete);
         }
     }
 
