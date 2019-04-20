@@ -1,6 +1,8 @@
 package com.example.financialtimes;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +24,14 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
 
     private List<Companies> companies;
     private Context context;
+    private Activity activity;
 
-    public FavouriteAdapter(List<Companies> companies, Context context){
+    SwipeRefreshLayout refresh;
+
+    public FavouriteAdapter(List<Companies> companies, Context context, Activity activity){
         this.companies = companies;
         this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -82,6 +88,8 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response){
                         Toast.makeText(context, companies.get(position).getCompany_name() + " removed from favourites.", Toast.LENGTH_SHORT).show();
+                        companies.remove(position);
+                        notifyDataSetChanged(); // remove the card and updates the database on method callback
                     }
 
                     @Override

@@ -76,7 +76,7 @@ public class bursaFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Companies>> call, Response<List<Companies>> response) {
                 fav_companies = response.body();
-                adaptor = new FavouriteAdapter(fav_companies, getContext());
+                adaptor = new FavouriteAdapter(fav_companies, getContext(), getActivity());
                 company_list.setAdapter(adaptor);
                 adaptor.notifyDataSetChanged();
             }
