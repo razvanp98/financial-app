@@ -82,8 +82,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
     public static class ViewHolderCompany extends RecyclerView.ViewHolder{
 
-        TextView name, symbol, price_today, price_yesterday, market_cap, percentage;
-        ImageView arrow;
+        TextView name, symbol;
         Button add;
 
         public ViewHolderCompany(View itemView) {
