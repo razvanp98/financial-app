@@ -84,6 +84,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
                 RemoveFavourite remove_interface = RemoveFavouriteAPI.getAPI().create(RemoveFavourite.class);
                 Call<Void> remove_favourite = remove_interface.remove_API(companies.get(position).getCompany_name());
 
+                // on clicking 'delete', make a call to database and set the 'favourite' field to value of '0'
                 remove_favourite.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response){
