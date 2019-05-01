@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface ShowFavouritesInterface {
-    @GET("show_favourites.php")
+    @GET("financial-times-API/show_favourites.php")
     Call<List<Companies>> showFavourites(@Query("status") String status);
 }

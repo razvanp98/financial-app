@@ -3,7 +3,7 @@ package com.example.financialtimes;
 import retrofit2.Retrofit;
 
 public class RemoveFavouriteAPI {
-    public static final String URL_BASE = "http://192.168.100.2/remove_favourite.php/";
+    public static final String URL_BASE = "http://192.168.1.104/financial-times-API/remove_favourite.php/";
     public static Retrofit retrofit;
 
     // Retrofit 2 API builder

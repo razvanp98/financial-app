@@ -110,7 +110,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
 
         TextView name, symbol, price_today, price_yesterday, market_cap, percentage;
         ImageView arrow;
-        Button delete;
+        TextView delete;
 
         public ViewHolderFavourite(View itemView) {
             super(itemView);

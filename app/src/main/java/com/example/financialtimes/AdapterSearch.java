@@ -43,42 +43,8 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
             holder.add.setEnabled(true);
         }
 
-        //Percentage calculator
-        String yesterdayPrice = companies.get(position).getPrice_yesterday();
-        String todayPrice = companies.get(position).getPrice_today();
-
-        double pricePercentage = getPercentage(todayPrice, yesterdayPrice);
-
-        if (pricePercentage < 0) {
-            holder.arrow.setImageResource(R.drawable.ic_red_down_arrow);
-        } else {
-            holder.arrow.setImageResource(R.drawable.ic_green_arrow_up);
-        }
-
-
-        // Truncated double for setting precision
-
-        Double initPercentage = new Double(pricePercentage);
-        Double truncatedPercentage = BigDecimal.valueOf(initPercentage).setScale(3, RoundingMode.HALF_UP).doubleValue();
-
-        // String builder for percentage
-        StringBuilder percentageString = new StringBuilder();
-        percentageString.append(String.valueOf(truncatedPercentage)).append(" ").append("%");
-
-
-        // String builder for Market Cap
-
-        StringBuilder volumeBuilder = new StringBuilder();
-        volumeBuilder.append(companies.get(position).getVolume()).append(" ").append("$");
-
-        // Setting all the information in their containers
-
         holder.name.setText(companies.get(position).getCompany_name());
         holder.symbol.setText(companies.get(position).getCompany_symbol());
-        holder.price_today.setText(companies.get(position).getPrice_today() + " " + "$");
-        holder.price_yesterday.setText(companies.get(position).getPrice_yesterday() + " " + "$");
-        holder.market_cap.setText(volumeBuilder.toString());
-        holder.percentage.setText(percentageString);
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,11 +92,6 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
             // Gets the containers from the layout resource
             name = itemView.findViewById(R.id.company_name);
             symbol = itemView.findViewById(R.id.company_symbol);
-            price_today = itemView.findViewById(R.id.today_price_value);
-            price_yesterday = itemView.findViewById(R.id.yesterday_price_value);
-            market_cap = itemView.findViewById(R.id.market_cap_value);
-            percentage = itemView.findViewById(R.id.percentage_value);
-            arrow = itemView.findViewById(R.id.arrow_percentage);
             add = itemView.findViewById(R.id.add_btn);
         }
     }
