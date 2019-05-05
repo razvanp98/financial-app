@@ -6,12 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 import retrofit2.Call;
@@ -54,7 +51,6 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
                         AddFavouriteInterface favouriteInterface = ApiClientFavourites.getAPI().create(AddFavouriteInterface.class);
                         Call<Void> updateFavourite = favouriteInterface.favourite_API("1", companies.get(position).getCompany_symbol());
 
-
                         updateFavourite.enqueue(new Callback<Void>(){
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response){
@@ -93,15 +89,5 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
             symbol = itemView.findViewById(R.id.company_symbol);
             add = itemView.findViewById(R.id.add_btn);
         }
-    }
-
-    // Calculates percentage of rising/falling price
-    double getPercentage(String todayPrice, String yesterdayPrice){
-        double todayPriceDouble = Double.parseDouble(todayPrice);
-        double yesterdayPriceDouble = Double.parseDouble(yesterdayPrice);
-
-        double percentage = ((todayPriceDouble / yesterdayPriceDouble) - 1) * 100;
-
-        return percentage;
     }
 }

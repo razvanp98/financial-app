@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    public static final String URL_BASE = "http://192.168.1.104/financial-times-API/stocks_API.php/";
+    public static final String URL_BASE = "http://192.168.100.4/financial-times-API/stocks_API.php/";
     public static Retrofit retrofit;
 
     // Retrofit 2 API builder
