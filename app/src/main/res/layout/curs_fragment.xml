@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.constraint.ConstraintLayout
@@ -10,88 +9,90 @@
         android:layout_height="1500dp"
         android:background="@color/lightGrey">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardView_calculator"
-            android:layout_width="0dp"
-            android:layout_height="323dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="10dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView_rates"
-            app:layout_constraintVertical_bias="0.0">
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView_calculator"
+                android:layout_width="0dp"
+                android:layout_height="323dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView_rates"
+                app:layout_constraintVertical_bias="0.0">
 
-            <TextView
-                android:id="@+id/calculator_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
-                android:text="Calculator"
-                android:textAlignment="center"
-                android:textSize="24sp" />
+                <TextView
+                    android:id="@+id/calculator_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Calculator"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/fromValue"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="50dp"
-                android:ems="10"
-                android:hint="From"
-                android:inputType="text"
-                android:textSize="13dp" />
+                <EditText
+                    android:id="@+id/fromValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="50dp"
+                    android:ems="10"
+                    android:hint="From"
+                    android:inputType="text"
+                    android:textSize="13dp" />
 
-            <EditText
-                android:id="@+id/toValue"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="150dp"
-                android:ems="10"
-                android:hint="To"
-                android:inputType="text"
-                android:textSize="13dp" />
+                <EditText
+                    android:id="@+id/toValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="150dp"
+                    android:ems="10"
+                    android:hint="To"
+                    android:inputType="text"
+                    android:textSize="13dp" />
 
 
-            <Spinner
-                android:id="@+id/fromOptions"
-                android:layout_width="120dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="220dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="16dp"
-                android:entries="@array/currency_array"
-                android:spinnerMode="dropdown" />
+                <Spinner
+                    android:id="@+id/fromOptions"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="220dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginRight="16dp"
+                    android:entries="@array/currency_array"
+                    android:spinnerMode="dropdown" />
 
-            <Spinner
-                android:id="@+id/toOptions"
-                android:layout_width="120dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="220dp"
-                android:layout_marginTop="150dp"
-                android:layout_marginRight="16dp"
-                android:entries="@array/currency_array"
-                android:spinnerMode="dropdown" />
+                <Spinner
+                    android:id="@+id/toOptions"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="220dp"
+                    android:layout_marginTop="150dp"
+                    android:layout_marginRight="16dp"
+                    android:entries="@array/currency_array"
+                    android:spinnerMode="dropdown" />
 
-            <Button
-                android:id="@+id/convertBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="250dp"
-                android:onClick="onClickConvert"
-                android:text="Convert" />
+                <Button
+                    android:id="@+id/convertBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="250dp"
+                    android:onClick="onClickConvert"
+                    android:text="Convert" />
 
-        </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
 
         <android.support.v7.widget.CardView
@@ -105,7 +106,7 @@
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView_graph"
             app:layout_constraintVertical_bias="0.0">
@@ -120,7 +121,9 @@
                 android:layout_marginBottom="5dp"
                 android:text="Rate de schimb"
                 android:textAlignment="center"
-                android:textSize="24sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/euro_title"
@@ -218,9 +221,11 @@
                 android:layout_height="24dp"
                 android:layout_marginLeft="250dp"
                 android:layout_marginTop="60dp"
-                android:text="----------"
+                android:text="N/A"
                 android:textAlignment="textStart"
-                android:textSize="18sp" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/usd_ron"
@@ -228,9 +233,11 @@
                 android:layout_height="24dp"
                 android:layout_marginLeft="250dp"
                 android:layout_marginTop="100dp"
-                android:text="----------"
+                android:text="N/A"
                 android:textAlignment="textStart"
-                android:textSize="18sp" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/gbp_ron"
@@ -238,9 +245,11 @@
                 android:layout_height="24dp"
                 android:layout_marginLeft="250dp"
                 android:layout_marginTop="140dp"
-                android:text="----------"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="N/A"
                 android:textAlignment="textStart"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/chf_ron"
@@ -248,9 +257,11 @@
                 android:layout_height="24dp"
                 android:layout_marginLeft="250dp"
                 android:layout_marginTop="180dp"
-                android:text="----------"
+                android:text="N/A"
                 android:textAlignment="textStart"
-                android:textSize="18sp" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/huf_ron"
@@ -258,20 +269,22 @@
                 android:layout_height="24dp"
                 android:layout_marginLeft="250dp"
                 android:layout_marginTop="220dp"
-                android:text="----------"
+                android:text="N/A"
                 android:textAlignment="textStart"
-                android:textSize="18sp" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/updatedOn"
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="175dp"
-                android:layout_marginTop="280dp"
+                android:layout_gravity="bottom|right"
+                android:layout_marginBottom="5dp"
                 android:text="Updated on"
-                android:textAlignment="textStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:typeface="sans" />
+                android:typeface="sans"
+                android:textStyle="bold"/>
 
 
         </android.support.v7.widget.CardView>
@@ -279,7 +292,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/cardView_graph"
             android:layout_width="0dp"
-            android:layout_height="384dp"
+            android:layout_height="500dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
@@ -293,7 +306,7 @@
             <com.jjoe64.graphview.GraphView
                 android:id="@+id/graph1"
                 android:layout_width="wrap_content"
-                android:layout_height="280dp"
+                android:layout_height="400dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="80dp"
                 android:layout_marginRight="8dp"
@@ -307,10 +320,11 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="8dp"
-                android:text="Evolutia cursului valutar (Euro)"
+                android:text="Evolutia cursului valutar (€)"
                 android:textAlignment="center"
-                android:textSize="28sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="28sp"
+                android:textStyle="bold" />
         </android.support.v7.widget.CardView>
-
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

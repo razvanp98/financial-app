@@ -96,7 +96,7 @@ public class cursFragment extends Fragment{
                 glr.setHumanRounding(true);
                 glr.setHorizontalLabelsAngle(45);
                 glr.setLabelsSpace(10);
-                glr.setPadding(30);
+                glr.setPadding(60);
             }
         });
 

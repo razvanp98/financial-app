@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,6 +26,7 @@ public class cryptoFragment extends Fragment {
     private CryptoAdapter adaptor;
     CryptoInterface crypto_interface;
     RecyclerView.LayoutManager crypto_layout;
+    SwipeRefreshLayout refresh_page = null;
 
     @Nullable
     @Override
@@ -32,6 +36,18 @@ public class cryptoFragment extends Fragment {
         crypto_layout = new LinearLayoutManager(getContext());
         crypto_list.setLayoutManager(crypto_layout);
         crypto_list.setHasFixedSize(true);
+
+        // Refresh layout implementation
+        refresh_page = view.findViewById(R.id.refresh_crypto);
+        refresh_page.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Fragment refreshed = new cryptoFragment();
+                FragmentManager fc = getFragmentManager();
+                FragmentTransaction ft = fc.beginTransaction();
+                ft.replace(R.id.frag_container, refreshed).commit();
+            }
+        });
 
         fetchCrypto("");
         return view;
