@@ -19,7 +19,7 @@
         android:layout_marginBottom="8dp"
         android:text="Name"
         android:textAlignment="textStart"
-        android:textColor="#111"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/company_symbol"
@@ -51,6 +51,7 @@
         style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_marginLeft="265dp"
         android:layout_marginTop="8dp"
         android:text="Add" />

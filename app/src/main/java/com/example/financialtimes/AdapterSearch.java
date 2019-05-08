@@ -36,8 +36,10 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
         if(companies.get(position).getFavourite().equals("1")){
             holder.add.setEnabled(false);
+            holder.add.setText("Added");
         }else{
             holder.add.setEnabled(true);
+            holder.add.setText("Add");
         }
 
         holder.name.setText(companies.get(position).getCompany_name());
@@ -57,6 +59,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
                                 String symbol = companies.get(position).getCompany_symbol();
                                 Toast.makeText(context, symbol + " has been added to favourites." , Toast.LENGTH_SHORT).show();
                                 holder.add.setEnabled(false);
+                                holder.add.setText("Added");
                             }
 
                             @Override
