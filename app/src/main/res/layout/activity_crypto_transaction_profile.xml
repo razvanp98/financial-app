@@ -51,6 +51,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="70dp"
         android:text="Currency: "
+        android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -61,6 +62,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="100dp"
         android:text="Symbol: "
+        android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -71,6 +73,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="130dp"
         android:text="Last price: "
+        android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -82,10 +85,26 @@
         android:layout_centerInParent="false"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="260dp"
         android:ems="10"
         android:gravity="right"
         android:hint="Amount invested ($)"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/profile_name"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="false"
+        android:layout_centerInParent="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="200dp"
+        android:ems="10"
+        android:gravity="right"
+        android:hint="Profile Name"
         android:inputType="number"
         android:textAlignment="center"
         android:textSize="16sp" />
@@ -98,7 +117,7 @@
         android:layout_centerInParent="false"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="320dp"
         android:ems="10"
         android:gravity="right"
         android:hint="Profit share (%)"
@@ -106,16 +125,13 @@
         android:textAlignment="center"
         android:textSize="16sp" />
 
-    <CheckBox
-        android:id="@+id/price_rise_alert"
+    <Button
+        android:id="@+id/create_profile_btn"
+        style="@style/Base.TextAppearance.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="320dp"
-        android:checked="false"
-        android:clickable="true"
-        android:text="Alert when price rises"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="12sp" />
+        android:layout_marginTop="400dp"
+        android:text="Create" />
 
 </RelativeLayout>

@@ -9,6 +9,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface CryptoInterface {
-    @GET("financial-times-API/crypto_api.php")
+    @GET("crypto_API.php")
     Call<List<Currency>> cryptoApi(@Query("key") @Nullable String keyword);
 }

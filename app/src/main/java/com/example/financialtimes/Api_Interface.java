@@ -7,7 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.Query;
 
 public interface Api_Interface {
-    @GET("financial-times-API/stocks_API.php")
+    @GET("stocks_API.php")
     // Key is catched in the PHP script
     Call<List<Companies>> stocks_API(@Query("key") String keyword);
 }
