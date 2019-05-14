@@ -3,7 +3,7 @@ package com.example.financialtimes;
 import retrofit2.Retrofit;
 
 public class ApiClientFavourites {
-    public static final String URL_BASE = "http://192.168.1.4/add_favourite.php/";
+    public static final String URL_BASE = "http://192.168.43.4/add_favourite.php/";
     public static Retrofit retrofit;
 
     // Retrofit 2 API builder
