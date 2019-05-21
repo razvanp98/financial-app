@@ -7,6 +7,7 @@ Initial prerequisites
 4. Go through the Android Studio's first-time configuration process, then install the Android 9.0 System Image on Emulator. This is needed for running the application.
 
 Server configuration:
+
 5. Download the PHP script files from the following link: 
 6. Extract all the files to "C://xampp//htdocs//financial-times-API" (create "financial-times-API" inside htdocs)
 7. Start Apache and MySQL servers.
