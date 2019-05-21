@@ -11,9 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CryptoTransactionProfile"
-            android:parentActivityName=".MainActivity">
-        </activity>
+        <activity android:name=".ViewProfile"></activity>
+        <activity
+            android:name=".CryptoTransactionProfile"
+            android:parentActivityName=".MainActivity"></activity>
         <activity
             android:name=".SearchDatabase"
             android:parentActivityName=".MainActivity">

@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CryptoClient {
-    public static final String BASE_URL = "http://192.168.43.4/crypto_api.php/";
+    public static final String BASE_URL = "http://192.168.1.100/financial-times-API/crypto_api.php/";
     public static Retrofit retrofit;
 
     public static Retrofit getApi(){

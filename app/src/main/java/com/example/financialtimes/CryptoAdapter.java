@@ -29,7 +29,7 @@ public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.ViewHolder
 
     // Implements the ViewHolder needed
     public static class ViewHolderCrypto extends RecyclerView.ViewHolder{
-        TextView name, symbol, low, high, latest_price, latest_volume;
+        TextView name, symbol, low, high, latest_price, latest_volume, profile_no;
         ImageView add_transaction;
 
         public ViewHolderCrypto(View item_view){
@@ -42,6 +42,7 @@ public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.ViewHolder
             latest_price = item_view.findViewById(R.id.latest_price_value);
             latest_volume = item_view.findViewById(R.id.latest_volume_value);
             add_transaction = item_view.findViewById(R.id.add_transaction);
+            profile_no = item_view.findViewById(R.id.profile_number);
         }
     }
 
@@ -53,6 +54,15 @@ public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.ViewHolder
         holder.high.setText(currencies.get(position).getHighest() + " $");
         holder.latest_price.setText(currencies.get(position).getLatest_price() + " $");
         holder.latest_volume.setText(currencies.get(position).getLatest_volume() + " $");
+        int no = currencies.get(position).getCount_no();
+        String click_prompt = " Click to see all profiles";
+        if (no == 0) {
+            holder.profile_no.setText("No profiles are active for " + holder.name.getText() + "." + click_prompt);
+        }else if(no == 1){
+            holder.profile_no.setText("1 profile is active for " + holder.name.getText() + "." + click_prompt);
+        }else{
+            holder.profile_no.setText(no + " are active for " + holder.name.getText() + "." + click_prompt);
+        }
 
         // set click listener for transaction profile
 
@@ -64,6 +74,14 @@ public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.ViewHolder
                 profile_activity.putExtra("COIN_SYMBOL", currencies.get(position).getSymbol());
                 profile_activity.putExtra("LAST_PRICE", currencies.get(position).getLatest_price());
                 context.startActivity(profile_activity);
+            }
+        });
+
+        holder.profile_no.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent view_profiles = new Intent(context, ViewProfile.class);
+                context.startActivity(view_profiles);
             }
         });
     }

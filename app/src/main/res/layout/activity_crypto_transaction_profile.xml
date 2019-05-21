@@ -94,22 +94,6 @@
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/profile_name"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="false"
-        android:layout_centerInParent="false"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="200dp"
-        android:ems="10"
-        android:gravity="right"
-        android:hint="Profile Name"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textSize="16sp" />
-
-    <EditText
         android:id="@+id/profit_share_val"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -122,6 +106,18 @@
         android:gravity="right"
         android:hint="Profit share (%)"
         android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/profile_name"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:ems="10"
+        android:hint="Profile Name"
+        android:inputType="textPersonName"
         android:textAlignment="center"
         android:textSize="16sp" />
 

@@ -9,6 +9,7 @@ public class Currency {
     @SerializedName("highest") private String highest;
     @SerializedName("latestVolume") private String latest_volume;
     @SerializedName("latestPrice") private String latest_price;
+    @SerializedName("profileCount") private int count_no;
 
     public String getName() {
         return name;
@@ -32,5 +33,9 @@ public class Currency {
 
     public String getLatest_price() {
         return latest_price;
+    }
+
+    public int getCount_no() {
+        return count_no;
     }
 }
