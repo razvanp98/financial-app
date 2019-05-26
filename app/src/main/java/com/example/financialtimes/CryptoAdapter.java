@@ -61,7 +61,7 @@ public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.ViewHolder
         }else if(no == 1){
             holder.profile_no.setText("1 profile is active for " + holder.name.getText() + "." + click_prompt);
         }else{
-            holder.profile_no.setText(no + " are active for " + holder.name.getText() + "." + click_prompt);
+            holder.profile_no.setText(no + " profiles are active for " + holder.name.getText() + "." + click_prompt);
         }
 
         // set click listener for transaction profile
