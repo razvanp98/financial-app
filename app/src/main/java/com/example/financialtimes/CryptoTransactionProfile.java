@@ -14,9 +14,9 @@ import retrofit2.Response;
 
 public class CryptoTransactionProfile extends AppCompatActivity {
     TextView name_container, symbol_container, last_price_container;
-    TextView profile_name_val, share_val, amount_val;
+    TextView profile_name_val, share_val, amount_val, coins_val;
     String profile_name, coin_symbol;
-    Double profit_share, amount;
+    Double profit_share, amount, coins;
     Button create_btn;
     AddProfile profile_interface;
 
@@ -39,6 +39,7 @@ public class CryptoTransactionProfile extends AppCompatActivity {
         profile_name_val = findViewById(R.id.profile_name);
         share_val = findViewById(R.id.profit_share_val);
         amount_val = findViewById(R.id.amount_invest_val);
+        coins_val = findViewById(R.id.coins_owned_val);
 
         name_container.setText(name);
         symbol_container.setText(symbol);
@@ -52,9 +53,10 @@ public class CryptoTransactionProfile extends AppCompatActivity {
                 coin_symbol = symbol_container.getText().toString();
                 profit_share = Double.parseDouble(share_val.getText().toString());
                 amount = Double.parseDouble(amount_val.getText().toString());
+                coins = Double.parseDouble(coins_val.getText().toString());
 
                 profile_interface = AddProfileClient.getAPI().create(AddProfile.class);
-                final Call<Void> add = profile_interface.addProfileApi(profile_name, coin_symbol, profit_share, amount);
+                final Call<Void> add = profile_interface.addProfileApi(profile_name, coin_symbol, profit_share, amount, coins);
 
                 add.enqueue(new Callback<Void>() {
                     @Override

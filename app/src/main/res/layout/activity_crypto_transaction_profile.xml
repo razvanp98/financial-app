@@ -5,6 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".CryptoTransactionProfile">
 
+    <EditText
+        android:id="@+id/coins_owned_val"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="380dp"
+        android:ems="10"
+        android:hint="Coins owned (units)"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="16sp" />
+
     <TextView
         android:id="@+id/name_crypto"
         android:layout_width="wrap_content"
@@ -127,7 +139,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="460dp"
         android:text="Create" />
 
 </RelativeLayout>

@@ -2,8 +2,9 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#FF7300</color>
     <color name="lightGrey">#DBDBDB</color>
+    <color name="removeRed">#DA1717</color>
     <color name="transparent">#CCDBDBDB</color>
 
 </resources>

@@ -81,6 +81,8 @@ public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.ViewHolder
             @Override
             public void onClick(View v){
                 Intent view_profiles = new Intent(context, ViewProfile.class);
+                view_profiles.putExtra("CURRENT_PRICE", currencies.get(position).getLatest_price());
+                view_profiles.putExtra("SYMBOL", currencies.get(position).getSymbol());
                 context.startActivity(view_profiles);
             }
         });
