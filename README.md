@@ -10,7 +10,7 @@
 ## Server configuration
 
 5. Download the PHP script files from the following link: 
-6. Extract all the files to ***C:/xampp//htdocs/financial-times-API***'(create ***financial-times-API*** folder inside ***htdocs***)
+6. Extract all the files to ***C:/xampp/htdocs/financial-times-API***'(create ***financial-times-API*** folder inside ***htdocs***)
 7. Start Apache and MySQL servers.
 8. Open **phpmyadmin** (***localhost/phpmyadmin*** in URL bar) and create the databases as shown in pictures below. (*Figure 1*)
 9. On your browser's URL bar, type: ***localhost/financial-times-API***. It will show you the scripts you've extracted earlier.
