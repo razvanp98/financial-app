@@ -1,11 +1,9 @@
-## Configuration and Running
+## Environment setup
 
 ## **Prerequisites**
 
-1. Download and install XAMPP on your local machine.
+1. 
 2. If not installed, get Android Studio from https://developer.android.com/studio.
-3. Clone or download the repository.
-4. Go through the Android Studio's first-time configuration process, then install the Android 9.0 System Image on Emulator. This is required for running the application.
 
 ## Server configuration
 
